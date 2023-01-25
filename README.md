@@ -1,4 +1,3 @@
-## Local Environment Setup
 
 ## Prerequisite Setup
 ### Homebrew Installation
@@ -57,9 +56,9 @@ Simillar way debugging for publish instance can be executed. Point to be noted t
 3. Click edit
 4. Check "Enabled" field in "Settings" tab.
 5. Make "Agent User Id" field emtpy in "Settings" tab.
-5. In "Transport" tab, insert "http://localhost:4503/bin/receive?sling:authRequestLogin=1" in URI field without double quote.
-6. In "Transport" tab, put username ("admin") and password ("admin") on "User" and "Password" fields.
-7. Click "OK"
+6. In "Transport" tab, insert "http://localhost:4503/bin/receive?sling:authRequestLogin=1" in URI field without double quote.
+7. In "Transport" tab, put username ("admin") and password ("admin") on "User" and "Password" fields.
+8. Click "OK"
 
 ## Install Project Archeotype
 ```
@@ -183,21 +182,21 @@ Next task to find the *wknd* folder and \[because the appId was wknd\] Delete it
 2. Keep it to $HOME/repo. or */opt/repo* as wish.
 3. Make it executable by
 
-```
-chmod 755 repo
-```
+    ```
+    chmod 755 repo
+    ```
 4. set *＄PATH* variable. Example: if you are using *bash_profile*
-```
-nano ~/.bash_profile
-```
-and add
->export PATH=$HOME/repo:$PATH
+    ```
+    nano ~/.bash_profile
+    ```
+    and add
+    >export PATH=$HOME/repo:$PATH
 5.
-```
-source ~/.bash_profile
-```
+    ```
+    source ~/.bash_profile
+    ```
 6. Now follow the documentation wrote on the github [README.md](https://github.com/Adobe-Marketing-Cloud/tools/tree/master/repo#manual-installation)
-
+å
 ## Create a Component
 ### Insight of a Component
 We have added a **site** and let's call it *My Site*.
