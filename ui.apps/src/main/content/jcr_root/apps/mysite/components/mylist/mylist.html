@@ -1,0 +1,7 @@
+<div data-sly-use.model="com.mysite.core.models.MyList"
+        data-sly-use.template="core/wcm/components/commons/v1/templates.html">
+  <ul data-sly-list.item="${model.list}">
+    <li>${item}</li>
+  </ul>
+</div>
+<sly data-sly-call="${template.placeholder @ isEmpty=model.list.size == 0}"></sly>
