@@ -41,10 +41,10 @@ To manually install  download openJdk from https://jdk.java.net/archive/  (**Not
 3. After a few minutes, a new tab should be opened in default browser automatically. If it doesn't, go to http://localhost:4502.
 4. Similarly, the publish instance can be started.
 5. If we need to start AEM instance in debug mode then following command should be executed
-```Conosle
-java -jar aem-author-p4502.jar -debug 9502
-```
-Simillar way debugging for publish instance can be executed. Point to be noted that, we will need to use a port after `-debug` command. And it should be non used port. To create similarity between instance port and debug port we can use arbitary port number. For example, as aem uses 4502 port number then we can use 9502 port number for debugging author instance.
+    ```Conosle
+    java -jar aem-author-p4502.jar -debug 9502
+    ```
+Similar way debugging for publish instance can be executed. Point to be noted that, we will need to use a port after `-debug` command. And it should be non used port. To create similarity between instance port and debug port we can use arbitary port number. For example, as aem uses 4502 port number then we can use 9502 port number for debugging author instance.
 
 ## How to Stop Author/Publish Instance
 1. Press CTRL-C in the terminal where `java -jar aem-author-p4502.jar` or ``java -jar aem-publish-p4503.jar`` command was issued.
@@ -60,7 +60,7 @@ Simillar way debugging for publish instance can be executed. Point to be noted t
 7. In "Transport" tab, put username ("admin") and password ("admin") on "User" and "Password" fields.
 8. Click "OK"
 
-## Install Project Archeotype
+## Install Project Archetype
 ```
 mvn -B org.apache.maven.plugins:maven-archetype-plugin:3.2.1:generate \
  -D archetypeGroupId=com.adobe.aem \
@@ -75,9 +75,9 @@ ref: (https://github.com/adobe/aem-project-archetype)
 1. Ensure you have an author instance of AEM running locally on port 4502.
 2. From the command line navigate into the project directory.
 3. Run the following command to build and deploy the entire project to AEM
-```console
-mvn clean install -PautoInstallPackage
-```
+    ```console
+    mvn clean install -PautoInstallPackage
+    ```
 
 ## Installing Dispatcher Tools Locally
 Local dispatcher tools can be installed following the instructons from the following page.
@@ -234,6 +234,10 @@ To configure the element, click on the *configure* and a dialog will be displaye
 The cq:dialog node is under the *helloworld* component node.
 http://localhost:4502/crx/de/index.jsp#/apps/mysite/components/helloworld/cq%3Adialog
 
+the dropped component's JCR on the page will be seen in the CRDXE 
+
+>http://localhost:4502/crx/de/index.jsp#/content/mysite
+
 **Note:**
 * The *sling:resourceType* is *cq/gui/components/authoring/dialog* because it is dialog box.
   if we use another apps's component here **directly and untouched**, in that case there will be no cq:dialog node. but we have to use
@@ -262,17 +266,43 @@ The backend java code is:
 ### Lets Make My Component:
 Follow the link https://experienceleague.adobe.com/docs/experience-manager-learn/getting-started-with-aem-headless/spa-editor/angular/custom-component.html
 
-
-To to add something more there are various example of _cq_dialog.content where some idea could be found.
+There are various example of _cq_dialog & .content where some ideas could be found.
 
 https://github.com/adobe/aem-core-wcm-components/tree/main/content/src/content/jcr_root/apps/core/wcm/components
 
 The Component Code :
 Follow https://github.com/muhammod-ibrahim-khalil/mysite/commit/7725407d2f81a82a972ee37960cc2551602576f2
 
+#### Dissection
+1. MyComponent.java 
+    ```
+        public interface MyComponent extends ComponentExporter {
+            public String getMessage();
+        }
+    ``` 
+   hold the Questions of Extending the class. You can go without it now.
 
+2. MyComponentImpl.java
+    ```
+        @ValueMapValue
+        private String message;
+    ```
+Gets property of the resource.
+*message* property of the Component.
+http://localhost:4502/crx/de/index.jsp#/content/mysite/us/en/jcr%3Acontent/root/container/container/mycomponent
 
+Now the component dropped on the page may not be seen. But it will be seen in side-panel content-tree.
+The answer and fix will be known later. :)
 
+### Lets Make MyList Component
+1. create java interface in the core>src>main>java>com.mysite.core>models and provide the methods.
+2. create class implementing the interface and rename as ~Impl.java
+3. > mvn clean install -PautoInstallPackage
+4. xml should be in ui.apps>src>main>content>jcr_root>apps.mysite>components
+5. HTL language knowledge needs now. 
+   - data-sly-use.model data-sly-use.template data-sly-list.item
+   - https://github.com/adobe/htl-spec/blob/master/SPECIFICATION.md keep this in hand.
+That's it.
 
 
 # Sample AEM project template
