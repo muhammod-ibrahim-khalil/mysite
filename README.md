@@ -305,6 +305,8 @@ The answer and fix will be known later. :)
 That's it.
 
 
+References: https://github.com/muhammod-ibrahim-khalil/mysite/commit/389cc4185589886718ce47cd2da2ca9ac4cd359a
+
 # Sample AEM project template
 
 This is a project template for AEM-based applications. It is intended as a best-practice set of examples as well as a potential starting point to develop your own functionality.
