@@ -35,9 +35,9 @@ To manually install  download openJdk from https://jdk.java.net/archive/  (**Not
 ## How to Start Author/Publish Instance
 1. Open terminal and `cd` into `author` folder.
 2. Start the author instance with the following command and wait for a few minutes. (When starting the author instance for the first time, you need to enter and re-enter a password for admin user.)
-```console
-java -jar aem-author-p4502.jar
-```
+    ```console
+    java -jar aem-author-p4502.jar
+    ```
 3. After a few minutes, a new tab should be opened in default browser automatically. If it doesn't, go to http://localhost:4502.
 4. Similarly, the publish instance can be started.
 5. If we need to start AEM instance in debug mode then following command should be executed
@@ -200,36 +200,36 @@ Next task to find the *wknd* folder and \[because the appId was wknd\] Delete it
 ## Create a Component
 ### Insight of a Component
 We have added a **site** and let's call it *My Site*.
-<img title='mysite.png' alt='mysite' src='/attachments/60af9d2a-6fc0-4ed9-89de-e6434834c398' width="1710" data-meta='{"width":1710,"height":506}'>
+<img title='mysite.png' alt='mysite' src='./docs/mysite.png' width="1710" data-meta='{"width":1710,"height":506}'>
 Looking inside the page *en*. (open it in *edit* mode)
 Here We will add a custom **Component** called *My Component*.
 
 **Before that take a look into  *Hello World Component*.**
 
-<img title='follow_meme.jpeg' alt='follow_meme' src='/attachments/29f7c432-dec3-47ec-922e-b1fa223f7e2d' width="640" data-meta='{"width":640,"height":480}'>
+<img title='follow_meme.jpeg' alt='follow_meme' src='./docs/follow_meme.jpeg' width="640" data-meta='{"width":640,"height":480}'>
 
 *[Disclaimer: This photo is subject to a famous meme on the context upon an intense investigation.]*
 
 
 #### Insight of Hello World Component
 
-<img title='Screen Shot 2023-01-18 at 11.05.59.png' alt='Screen Shot 2023-01-18 at 11.05.59' src='/attachments/449531ab-f537-4475-9763-ea690716993e' width="1304" data-meta='{"width":1304,"height":1510}'>
+<img title='insight helloworld component authoring' alt='insight helloworld component' src='./docs/insight-helloworld-component.png' width="1304" data-meta='{"width":1304,"height":1510}'>
 
 The *jcr* file is at http://localhost:4502/crx/de/index.jsp#/apps/mysite/components/helloworld.
 
-<img title='Screen Shot 2023-01-18 at 11.07.36.png' alt='Screen Shot 2023-01-18 at 11.07.36' src='/attachments/e48352b3-92f9-46a0-ba8e-381c5796423c' width="1624" data-meta='{"width":1624,"height":388}'>
+<img title='insight helloworld component jcr' alt='insight helloworld component jcr' src='./docs/insight-helloworld-jcr.png' width="1624" data-meta='{"width":1624,"height":388}'>
 
 After adding the component a element will be displayed into the page.
 
-<img title='Screen Shot 2023-01-18 at 11.24.00.png' alt='Screen Shot 2023-01-18 at 11.24.00' src='/attachments/79d28131-c90e-4d35-90b1-65dd22e54e28' width="2746" data-meta='{"width":2746,"height":1066}'>
+<img title='insight helloworld component jcr' alt='insight helloworld component jcr' src='./docs/helloworld-component.png' width="2746" data-meta='{"width":2746,"height":1066}'>
 
 This html element is from http://localhost:4502/crx/de/index.jsp#/apps/mysite/components/helloworld/helloworld.html
-*Note: it is inside the helloworld node.*
+*Note: it is inside the hello world node.*
 Now it is showing a by default element.
 To configure the element, click on the *configure* and a dialog will be displayed.
 **It is called cq:dialog**
 
-<img title='Screen Shot 2023-01-18 at 12.32.48.png' alt='Screen Shot 2023-01-18 at 12.32.48' src='/attachments/769be098-9a2d-4ec5-a214-539bee4a8bcd' width="1234" data-meta='{"width":1234,"height":666}'>
+<img title='cq dialog' alt='cq dialog' src='./docs/cq-dialog.png' width="1234" data-meta='{"width":1234,"height":666}' height="">
 
 The cq:dialog node is under the *helloworld* component node.
 http://localhost:4502/crx/de/index.jsp#/apps/mysite/components/helloworld/cq%3Adialog
@@ -243,7 +243,7 @@ http://localhost:4502/crx/de/index.jsp#/apps/mysite/components/helloworld/cq%3Ad
 * there will be a *jcr:title* to show the title of the dialog box.
 
 So It might be larking in mind that we may copy a node from the crx and then edit it on the crx window to create a new component. But . . .
-<img title='meme.jpeg' alt='meme' src='/attachments/4455af34-b286-4241-b330-b961150d2544' width="680" data-meta='{"width":680,"height":407}'>
+<img title='smart move meme' alt='meme' src='./docs/move_meme.jpeg' width="680" data-meta='{"width":680,"height":407}'>
 
 *[Disclaimer: This photo is subject to a famous meme on the context on a smart move.]*
 #### Insight about codebase in Project dir and IDE:
