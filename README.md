@@ -1,15 +1,19 @@
-
 ## Prerequisite Setup
+
 ### Homebrew Installation
+
 We'll use homebrew to install java, node, etc. [It is like installing package using *apt-get install* in linux]
 1. Install homebrew following the instructions from https://brew.sh/
+
 ### Java Installation
 1. Install Java 11 using homebrew.
-```console
-brew install java11
-```
+    ```console
+    brew install java11
+    ```
 OR
+
 To manually install  download openJdk from https://jdk.java.net/archive/  (**Note: Avoid Oracle JDK as it is not free for commercial use**)
+
 1. Unzip the archive.
 2. Place it to '/opt'.
 3. add jdk/bin directory path to the environment.
@@ -20,6 +24,7 @@ To manually install  download openJdk from https://jdk.java.net/archive/  (**Not
 
 
 ### Maven Installation
+
 1. Download Apache Maven from https://maven.apache.org/download.cgi
 2. Install Apache Maven following the instructions from https://maven.apache.org/install.html
 3. Place this file to the maven folder. https://experienceleague.adobe.com/docs/experience-cloud-kcs/kbarticles/KA-17454.html?lang=en
@@ -161,7 +166,7 @@ Note!!! aemVersion="cloud" because we are using cloud sdk.
 5. make sure by searching *wknd* under *All packages* Group.
 6. Now Back to the http://localhost:4502/crx/de/index.jsp
 
-Next task to find the *wknd* folder and \[because the appId was wknd\] Delete it.
+Next task to find the *wknd* folder and \[because the ap®dpId was wknd\] Delete it.
 
 * Expand **app**
 * Expand **conf**
@@ -174,8 +179,11 @@ Next task to find the *wknd* folder and \[because the appId was wknd\] Delete it
 1. Check Package Manager http://localhost:4502/crx/packmgr/index.jsp
 2. Search wcm and see if anything is remained uninstalled.
 3. Or https://github.com/adobe/aem-core-wcm-components/releases/tag/core.wcm.components.reactor-2.21.2 and download *core.wcm.components.all-2.21.2.zip* and install it via package manager.
+
 ## IDE Setup
+
 ### Intellij:Mac: Repo Tool:
+
 **!!!!NOTE: You must have atleast personal license. Educational License can not be used for commercial purpose. And counterfeiting License is also strictly prohibitted.**
 *https://github.com/shsteimer/IntelliVault is depricated thats why repo tool is recommended for pushing/pulling content to the crx repository.*
 1. Download repo bash from https://github.com/Adobe-Marketing-Cloud/tools/releases
@@ -196,7 +204,35 @@ Next task to find the *wknd* folder and \[because the appId was wknd\] Delete it
     source ~/.bash_profile
     ```
 6. Now follow the documentation wrote on the github [README.md](https://github.com/Adobe-Marketing-Cloud/tools/tree/master/repo#manual-installation)
-å
+
+### Debugger:
+
+#### Intellij:
+
+Reference: https://www.mavice.com/blog/debugging-your-aem-6-4-application-in-intellij/
+1. Close the author instance.
+2. Run the command 
+    ```
+   java -XX:MaxPermSize=512m -Xmx2048M -agentlib:jdwp=transport=dt_socket,address=4502,server=y,suspend=n -jar aem-author-p4502.jar -p 4502
+   ```
+3. Follow the reference link. [ Set the port address according to the author instance. 4502]
+![debugger_intellij.png](docs%2Fdebugger_intellij.png)
+
+## Modules
+
+The main parts of the template are:
+
+* core: Java bundle containing all core functionality like OSGi services, listeners or schedulers, as well as component-related Java code such as servlets or request filters.
+* it.tests: Java based integration tests
+* ui.apps: contains the /apps (and /etc) parts of the project, ie JS&CSS clientlibs, components, and templates
+* ui.content: contains sample content using the components from the ui.apps
+* ui.config: contains run mode specific OSGi configs for the project
+* ui.frontend: an optional dedicated front-end build mechanism (Angular, React or general Webpack project)
+* ui.tests: Selenium based UI tests
+* all: a single content package that embeds all of the compiled modules (bundles and content packages) including any vendor dependencies
+* analyse: this module runs analysis on the project which provides additional validation for deploying into AEMaaCS
+
+
 ## Create a Component
 ### Insight of a Component
 We have added a **site** and let's call it *My Site*.
@@ -209,7 +245,6 @@ Here We will add a custom **Component** called *My Component*.
 <img title='follow_meme.jpeg' alt='follow_meme' src='./docs/follow_meme.jpeg' width="640" data-meta='{"width":640,"height":480}'>
 
 *[Disclaimer: This photo is subject to a famous meme on the context upon an intense investigation.]*
-
 
 #### Insight of Hello World Component
 
@@ -274,6 +309,7 @@ The Component Code :
 Follow https://github.com/muhammod-ibrahim-khalil/mysite/commit/7725407d2f81a82a972ee37960cc2551602576f2
 
 #### Dissection
+
 1. MyComponent.java 
     ```
         public interface MyComponent extends ComponentExporter {
@@ -287,12 +323,13 @@ Follow https://github.com/muhammod-ibrahim-khalil/mysite/commit/7725407d2f81a82a
         @ValueMapValue
         private String message;
     ```
-Gets property of the resource.
+Gets properties of the resource.
 *message* property of the Component.
 http://localhost:4502/crx/de/index.jsp#/content/mysite/us/en/jcr%3Acontent/root/container/container/mycomponent
 
 Now the component dropped on the page may not be seen. But it will be seen in side-panel content-tree.
-The answer and fix will be known later. :)
+
+*Reason behind the incident is, If the component initially has no element, it can not render anything.*
 
 ### Lets Make MyList Component
 1. create java interface in the core>src>main>java>com.mysite.core>models and provide the methods.
@@ -306,129 +343,11 @@ That's it.
 
 References: https://github.com/muhammod-ibrahim-khalil/mysite/commit/389cc4185589886718ce47cd2da2ca9ac4cd359a
 
-# Sample AEM project template
+### Lets Dive deeper!
+Currently, it just shows an unordered list which we have hard coded earlier. What's about take list value input from the
+user.
 
-This is a project template for AEM-based applications. It is intended as a best-practice set of examples as well as a potential starting point to develop your own functionality.
 
-## Modules
+# 
+https://sling.apache.org/documentation/the-sling-engine/url-decomposition.html
 
-The main parts of the template are:
-
-* core: Java bundle containing all core functionality like OSGi services, listeners or schedulers, as well as component-related Java code such as servlets or request filters.
-* it.tests: Java based integration tests
-* ui.apps: contains the /apps (and /etc) parts of the project, ie JS&CSS clientlibs, components, and templates
-* ui.content: contains sample content using the components from the ui.apps
-* ui.config: contains runmode specific OSGi configs for the project
-* ui.frontend: an optional dedicated front-end build mechanism (Angular, React or general Webpack project)
-* ui.tests: Selenium based UI tests
-* all: a single content package that embeds all of the compiled modules (bundles and content packages) including any vendor dependencies
-* analyse: this module runs analysis on the project which provides additional validation for deploying into AEMaaCS
-
-## How to build
-
-To build all the modules run in the project root directory the following command with Maven 3:
-
-    mvn clean install
-
-To build all the modules and deploy the `all` package to a local instance of AEM, run in the project root directory the following command:
-
-    mvn clean install -PautoInstallSinglePackage
-
-Or to deploy it to a publish instance, run
-
-    mvn clean install -PautoInstallSinglePackagePublish
-
-Or alternatively
-
-    mvn clean install -PautoInstallSinglePackage -Daem.port=4503
-
-Or to deploy only the bundle to the author, run
-
-    mvn clean install -PautoInstallBundle
-
-Or to deploy only a single content package, run in the sub-module directory (i.e `ui.apps`)
-
-    mvn clean install -PautoInstallPackage
-
-## Testing
-
-There are three levels of testing contained in the project:
-
-### Unit tests
-
-This show-cases classic unit testing of the code contained in the bundle. To
-test, execute:
-
-    mvn clean test
-
-### Integration tests
-
-This allows running integration tests that exercise the capabilities of AEM via
-HTTP calls to its API. To run the integration tests, run:
-
-    mvn clean verify -Plocal
-
-Test classes must be saved in the `src/main/java` directory (or any of its
-subdirectories), and must be contained in files matching the pattern `*IT.java`.
-
-The configuration provides sensible defaults for a typical local installation of
-AEM. If you want to point the integration tests to different AEM author and
-publish instances, you can use the following system properties via Maven's `-D`
-flag.
-
-| Property | Description | Default value |
-| --- | --- | --- |
-| `it.author.url` | URL of the author instance | `http://localhost:4502` |
-| `it.author.user` | Admin user for the author instance | `admin` |
-| `it.author.password` | Password of the admin user for the author instance | `admin` |
-| `it.publish.url` | URL of the publish instance | `http://localhost:4503` |
-| `it.publish.user` | Admin user for the publish instance | `admin` |
-| `it.publish.password` | Password of the admin user for the publish instance | `admin` |
-
-The integration tests in this archetype use the [AEM Testing
-Clients](https://github.com/adobe/aem-testing-clients) and showcase some
-recommended [best
-practices](https://github.com/adobe/aem-testing-clients/wiki/Best-practices) to
-be put in use when writing integration tests for AEM.
-
-## Static Analysis
-
-The `analyse` module performs static analysis on the project for deploying into AEMaaCS. It is automatically
-run when executing
-
-    mvn clean install
-
-from the project root directory. Additional information about this analysis and how to further configure it
-can be found here https://github.com/adobe/aemanalyser-maven-plugin
-
-### UI tests
-
-They will test the UI layer of your AEM application using Selenium technology. 
-
-To run them locally:
-
-    mvn clean verify -Pui-tests-local-execution
-
-This default command requires:
-* an AEM author instance available at http://localhost:4502 (with the whole project built and deployed on it, see `How to build` section above)
-* Chrome browser installed at default location
-
-Check README file in `ui.tests` module for more details.
-
-## ClientLibs
-
-The frontend module is made available using an [AEM ClientLib](https://helpx.adobe.com/experience-manager/6-5/sites/developing/using/clientlibs.html). When executing the NPM build script, the app is built and the [`aem-clientlib-generator`](https://github.com/wcm-io-frontend/aem-clientlib-generator) package takes the resulting build output and transforms it into such a ClientLib.
-
-A ClientLib will consist of the following files and directories:
-
-- `css/`: CSS files which can be requested in the HTML
-- `css.txt` (tells AEM the order and names of files in `css/` so they can be merged)
-- `js/`: JavaScript files which can be requested in the HTML
-- `js.txt` (tells AEM the order and names of files in `js/` so they can be merged
-- `resources/`: Source maps, non-entrypoint code chunks (resulting from code splitting), static assets (e.g. icons), etc.
-
-## Maven settings
-
-The project comes with the auto-public repository configured. To setup the repository in your Maven settings, refer to:
-
-    http://helpx.adobe.com/experience-manager/kb/SetUpTheAdobeMavenRepository.html
