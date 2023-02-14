@@ -1,10 +1,10 @@
 package com.mysite.core.models;
 
-import java.util.List;
+import java.util.Collection;
 
 public interface MyList {
 
-    List<String> getList();
+    Collection<String> getItems();
 
 }
 
